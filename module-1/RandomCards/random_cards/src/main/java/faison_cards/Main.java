@@ -24,13 +24,13 @@ import javafx.stage.Stage;
  * Random Card Display
 */
 public class Main extends Application {
-
+    //Display for cards, so it can publically accessed
     HBox cardDisplay = new HBox(10);
 
 
     @Override
     public void start(Stage mainStage){
-
+        //Font Variable
         Font font = Font.font("Arial",FontWeight.BOLD,25);
 
         Label headerLabel = new Label("Random Cards");
@@ -38,6 +38,7 @@ public class Main extends Application {
         headerLabel.setTextFill(Color.WHITE);
         //Button
         Button refreshButton = new Button("New Cards");
+        //lambda expression, when pressed execute function
         refreshButton.setOnAction(e  -> displayRandomCards());
         refreshButton.setAlignment(Pos.BOTTOM_CENTER);
         refreshButton.setStyle("-fx-background-color:rgb(124, 255, 216)");
@@ -47,9 +48,9 @@ public class Main extends Application {
 
         //Initial Card View
         displayRandomCards();
-
+        //Root to hold all the nodes
         BorderPane root = new BorderPane();
-
+        //Node Placement
         root.setTop(headerLabel);
         root.setCenter(cardDisplay);
         root.setBottom(refreshButton);
@@ -72,16 +73,21 @@ public class Main extends Application {
 
     //Card Logic
     private void displayRandomCards(){
+        //Clear the first initial cards
         cardDisplay.getChildren().clear();
-
+        //Set a list of card numbers to a new array
         List<Integer> cardNumbers = new ArrayList<>();
-
+        //For each number till 52, add 1-52 to the number list
         for (int i = 1; i <= 52; i++) {
             cardNumbers.add(i);
         }
+        //Randomly reorder items in list
         Collections.shuffle(cardNumbers);
+        //from that randomized list, recieve a small portion from index 0-4
         List<Integer> randomSelectedCards = cardNumbers.subList(0, 4);
-        
+        //lambda expression
+        //for each randomly selected card, fetch the matching image
+        //and append the image to the card display
         randomSelectedCards.forEach(cardNum -> {
 
             String imagePath = "/AssignmentCards/"+cardNum+".png";
