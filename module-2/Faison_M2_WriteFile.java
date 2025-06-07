@@ -13,7 +13,7 @@ public class Faison_M2_WriteFile {
         //First TryCatch : File creation
         try {
             //Create file and display name
-            File fileName = new File("DEJANAE_datafile.dat");
+            File fileName = new File("DEJANAEdatafile.dat");
             if (fileName.createNewFile()) {
                 System.out.println("\n--|FILE CREATION SUCCESSFUL|--");
                 System.out.println("\nFile created: "+ fileName.getName());
