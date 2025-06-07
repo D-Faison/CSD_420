@@ -71,3 +71,5 @@ public class Faison_M2_WriteFile {
         
     }
 }
+//Resource:
+//W3Schools. (2020). Java Create and Write To Files. W3schools.com. https://www.w3schools.com/java/java_files_create.asp
