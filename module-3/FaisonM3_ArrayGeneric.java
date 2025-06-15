@@ -5,6 +5,7 @@ import java.util.Random;
 
 //DeJanae Faison
 //M3 Assignment : Array Lists and Generics
+//Create a list with 50 random values then create a new list from the original that holds no duplicates
 //Due 6.15.25
 
 public class FaisonM3_ArrayGeneric {
@@ -13,15 +14,16 @@ public class FaisonM3_ArrayGeneric {
         //Create original list and fill with random values
         ArrayList <Integer> originaList = new ArrayList<>();
         Random randomValue = new Random();
-        for (int i = 0; i < 50; i++) {
-            originaList.add(randomValue.nextInt(20));
+        for (int i = 1; i < 50; i++) {
+            //plus one so it excludes 0
+            originaList.add(randomValue.nextInt(20) + 1);
         }
         //Print og list
         System.out.println("\nOriginal List: ");
         System.out.print(originaList);
         System.out.println("\n");
 
-        //New List
+        //New List using original list
         ArrayList<Integer> newList = removeDuplicates(originaList);
 
         System.out.println("\nNew List: ");
