@@ -7,9 +7,11 @@
 import java.util.Comparator;
 
 public class Faison_M6Bubble {
-   //Comparable bubble sort method
+   //Comparable bubble sort method using the Generic Element
    public static <E extends Comparable<E>> void bubbleSort(E[] list) {
+      //Boolean variable 
       boolean swapped;
+      //do while false, until nothing else is swapped
       do {
          swapped = false;
          for (int i = 0; i < list.length - 1; i++) {
@@ -22,7 +24,7 @@ public class Faison_M6Bubble {
          }
       } while (swapped);
    }
-
+   //Comparator bubble sort method
    public static <E> void bubbleSort(E[] list, Comparator<? super E> comparator){
       boolean swapped;
       do {
@@ -44,13 +46,14 @@ public class Faison_M6Bubble {
       //Array of integers to be sorted
       Integer[] intArray = {5, 2, 9, 1, 5, 6, 3, 8, 7, 4, 0, 9};
       Integer[] intArray2 = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
+      //Print the original arrays
       System.out.println("\n===| Original Integer Array |===");
       printArray(intArray);
-
+      //Print Comarable
       bubbleSort(intArray);
       System.out.println("\n===| Comparable Sort |===");
       printArray(intArray);
-
+      //Print Comparator
       bubbleSort(intArray2, new Comparator<Integer>() {
          @Override
          public int compare(Integer o1, Integer o2) {
