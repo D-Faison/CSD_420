@@ -1,60 +1,50 @@
-
-import java.util.Comparator;
-
 /*DeJanae Faison M6 Due 6.28.25
- * Prograam using bubble sort with  two methods
+ * Program using bubble sort with  two methods
  * Method 1: Sorts using Comparable Interface
  * Method 2: Sorts using Comparator Interface
  */
 
- public class Faison_M6Bubble {
-    public static void main(String[] args) {
+import java.util.Comparator;
+
+public class Faison_M6Bubble {
+   //Comparable bubble sort method
+   public static <E extends Comparable<E>> void bubbleSort(E[] list) {
+      boolean swapped;
+      do {
+         swapped = false;
+         for (int i = 0; i < list.length - 1; i++) {
+            if (list[i].compareTo(list[i + 1]) > 0) {
+               E temp = list[i];
+               list[i] = list[i + 1];
+               list[i + 1] = temp;
+               swapped = true;
+            }
+         }
+      } while (swapped);
+   }
+
+   public static <E> void bubbleSort(E[] list, Comparator<? super E> comparator){
+      
+   }
+   public static void main(String[] args) {
         
-         //Array of integers (use Integer[] for generics)
-         Integer[] unsortedArray = {7, 3, 8, 5, 2, 6, 4, 1};
+      //Array of integers to be sorted
+      Integer[] intArray = {5, 2, 9, 1, 5, 6, 3, 8, 7, 4, 0, 9};
+      System.out.println("\n===| Original Integer Array |===");
+      printArray(intArray);
 
-         System.out.println("\n===| Unsorted Array |===");
-         for (int num : unsortedArray) {
-             System.out.print(num + " ");
-         }
-
-         // Sort using bubbleSort with Comparable
-         bubbleSort(unsortedArray); 
-         
-         System.out.println("\n\n===| Sorted Array using Comparable |===");
-         for (int num : unsortedArray) {
-             System.out.print(num + " ");
-         }
+      bubbleSort(intArray);
+      System.out.println("\n===| Comparable Sort |===");
+      printArray(intArray);
     }
 
-    public static<E extends Comparable<E>> void bubbleSort(E[] array) {
-        boolean swapped;
-        do {
-            swapped = false;
-            for (int i = 0; i < array.length - 1; i++) {
-                if (array[i].compareTo(array[i + 1]) > 0) {
-                    E temp = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temp;
-                    swapped = true;
-                }
-            }
-        } while (swapped);
-    }
-
-    public static<E> void bubbleSort(E[] array, Comparator<? super E> comparator) {
-        boolean swapped;
-        do {
-            swapped = false;
-            for (int i = 0; i < array.length - 1; i++) {
-                if (comparator.compare(array[i], array[i + 1]) > 0) {
-                    E temp = array[i];
-                    array[i] = array[i + 1];
-                    array[i + 1] = temp;
-                    swapped = true;
-                }
-            }
-        } while (swapped);
-    }
+    //Method for printing the arrays
+   public static <E> void printArray(E[] array) {
+      for (E element : array) {
+         System.out.print(element + " ");
+      }
+      System.out.println();
+      System.out.println("\n");
+   }
  }
 
