@@ -1,0 +1,27 @@
+.plaincircle{
+    fill: white;
+    -fx-fill:white;
+    stroke: black;
+    -fx-stroke:black;
+}
+
+.border {
+ -fx-border-color: black;
+ border-color: black;
+ -fx-border-width: 5;
+ border-width: 5;
+ }
+
+ #redcircle{
+    fill: red;
+    -fx-fill: red;
+    stroke: red;
+    -fx-stroke:red;
+ }
+
+  #greencircle{
+    fill: green;
+    -fx-fill: green;
+    stroke: green;
+    -fx-stroke:green;
+ }
