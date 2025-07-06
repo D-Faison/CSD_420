@@ -20,7 +20,7 @@ import javafx.stage.Stage;
         //Set Hbox with set spacing
         HBox hbox = new HBox(5);
         //Scene with hbox as root
-        Scene scene = new Scene(hbox,300,200);
+        Scene scene = new Scene(hbox,400,200);
         //Attach stylesheet
         scene.getStylesheets().add("mystyle.css");
 
@@ -41,8 +41,13 @@ import javafx.stage.Stage;
         pane3.getChildren().addAll(circle3);
         circle3.setId("redcircle");
 
+        Pane pane4 = new Pane();
+        Circle circle4 = new Circle(50,100,30);
+        pane4.getChildren().addAll(circle4);
+        circle4.setId("greencircle");
+
         //Add Panes to hbox
-        hbox.getChildren().addAll(pane1,pane2,pane3);
+        hbox.getChildren().addAll(pane1,pane2,pane3,pane4);
         //set the stage
         primaryStage.setTitle("Faison M7 CSS Java");
         primaryStage.setScene(scene);
