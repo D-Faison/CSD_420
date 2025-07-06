@@ -14,24 +14,52 @@ import java.util.Random;
     private static final int CHAR_COUNT = 10000;
 
     public static void main(String[] args) {
+
+
+        //String Builders for mutability
+        StringBuilder lettersOutput = new StringBuilder();
+        StringBuilder digitsOutput = new StringBuilder();
+        StringBuilder symbolsOutput = new StringBuilder();
         
         //Initialize Thread Variable to call function
-        Thread lettersThread = new Thread(new RandomLetters());
-        Thread digitsThread = new Thread(new RandomNumbers());
-        Thread symbolsThread = new Thread(new RandomSymbols());
+        Thread lettersThread = new Thread(new RandomLetters(lettersOutput));
+        Thread digitsThread = new Thread(new RandomNumbers(digitsOutput));
+        Thread symbolsThread = new Thread(new RandomSymbols(symbolsOutput));
 
-        //Start function
-        System.out.println("===| Random Letters |===");
+        //Start threads
         lettersThread.start();
-
-        System.out.println("===| Random Numbers |=== ");
         digitsThread.start();
-
         symbolsThread.start();
+        try {
+            //Wait for completion
+            lettersThread.join();
+            digitsThread.join();
+            symbolsThread.join();
+        } catch (InterruptedException ex) {
+            System.err.println("Didnt work");
+        }
+
+
+        //Outputs and their headers
+        System.out.println("\n===| Random Letters |===\n");
+        System.out.print(lettersOutput);
+        
+        System.out.println("\n===| Random Numbers |===\n");
+        System.out.print(digitsOutput);
+
+        System.out.println("\n===| Random Symbols |===\n");
+        System.out.print(symbolsOutput);
+
     }
 
     //Random letters method
     static class RandomLetters implements Runnable {
+
+        private final StringBuilder output;
+
+        public RandomLetters(StringBuilder output){
+            this.output = output;
+        }
        @Override
        public void run(){
             Random random = new Random();
@@ -40,7 +68,7 @@ import java.util.Random;
                char letters = random.nextBoolean() ? 
                               (char) ('a' + random.nextInt(26)) : 
                               (char) ('a' + random.nextInt(26));
-                System.out.print(letters);
+                output.append(letters);
             }
 
        }
@@ -48,13 +76,20 @@ import java.util.Random;
 
     //Random numbers method
     static class RandomNumbers implements Runnable{
+
+        private final StringBuilder output;
+
+        public RandomNumbers(StringBuilder output){
+            this.output = output;
+        }
+
         @Override
         public void run(){
             Random random = new Random();
             for( int i = 0; i < CHAR_COUNT; i++){
                 char numbers = (char)('0'+ random.nextInt(10));
 
-                System.out.print(numbers);
+                output.append(numbers);
             }
         }
     }
@@ -63,13 +98,22 @@ import java.util.Random;
     static class RandomSymbols implements Runnable{
    
         private final char[] symbolsArray = {'!','@','#','$','%','&','*'};
+
+        private final StringBuilder output;
+
+        public RandomSymbols(StringBuilder output){
+            this.output = output;
+        }
         @Override
         public void run(){
             Random random = new Random();
             for (int i = 0; i < CHAR_COUNT; i++) {
                 char character = symbolsArray[random.nextInt(symbolsArray.length)];
-                System.out.print(character);
+                output.append(character);
             }
         } 
     }
  }
+ /*Resources:
+  * OpenAI. (2023). ChatGPT (Mar 14 version) [Large language model]. https://chat.openai.com/chat
+  */
