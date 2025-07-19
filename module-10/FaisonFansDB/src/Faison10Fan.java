@@ -35,7 +35,7 @@ public class Faison10Fan{
             System.err.println("!!!!Error to connect to database!!!");
         }
     }
-
+    // Method to get a fan by ID
     public Records getFanById(int id) {
         Records fan = null;
         try {
@@ -54,6 +54,22 @@ public class Faison10Fan{
             System.err.println("Error fetching fan by ID: " + e.getMessage());
         }
         return fan;
+    }
+    // Method to update a fan's details
+    public boolean updateFan(Records fan) {
+        try {
+            String query = "UPDATE fans SET firstname = ?, lastname = ?, favoriteTeam = ? WHERE id = ?";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, fan.getFirstName());
+            preparedStatement.setString(2, fan.getLastName());
+            preparedStatement.setString(3, fan.getFavoriteTeam());
+            preparedStatement.setInt(4, fan.getId());
+
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating fan: " + e.getMessage());
+        }
+        return false;
     }
 
     public static void main(String[] args) {

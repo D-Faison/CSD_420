@@ -71,9 +71,43 @@ public class GUI extends JFrame {
                     lastNameTextField.setText(fan.getLastName());
                     favoriteTeamTextField.setText(fan.getFavoriteTeam());
                 } else {
+                    // Show error message if fan not found
                     JOptionPane.showMessageDialog(this, "Fan not found!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (NumberFormatException ex) {
+                // Show error message for invalid ID format
+                JOptionPane.showMessageDialog(this, "Invalid ID format!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+
+        //Action Listener for Update Button
+        updateButton.addActionListener(e -> {
+            try {
+                int id = Integer.parseInt(idTextField.getText().trim());
+                String firstName = firstNameTextField.getText().trim();
+                String lastName = lastNameTextField.getText().trim();
+                String favoriteTeam = favoriteTeamTextField.getText().trim();
+                // Validate input
+                if (firstName.isEmpty() || lastName.isEmpty() || favoriteTeam.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "All fields must be filled out!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Records fan = new Records();
+                fan.setId(id);
+                fan.setFirstName(firstName);
+                fan.setLastName(lastName);
+                fan.setFavoriteTeam(favoriteTeam);
+
+                boolean updated = db.updateFan(fan);
+                if (updated) {
+                    JOptionPane.showMessageDialog(this, "Fan updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error updating fan!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                // Show error message for invalid ID format
                 JOptionPane.showMessageDialog(this, "Invalid ID format!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
