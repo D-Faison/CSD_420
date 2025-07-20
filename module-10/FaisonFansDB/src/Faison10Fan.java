@@ -51,7 +51,7 @@ public class Faison10Fan{
                 fan.setId(resultSet.getInt("id"));
                 fan.setFirstName(resultSet.getString("firstname"));
                 fan.setLastName(resultSet.getString("lastname"));
-                fan.setFavoriteTeam(resultSet.getString("favoriteTeam"));
+                fan.setFavoriteTeam(resultSet.getString("favoriteteam"));
             }
         } catch (SQLException e) {
             System.err.println("Error fetching fan by ID: " + e.getMessage());
@@ -62,7 +62,7 @@ public class Faison10Fan{
     public boolean updateFan(Records fan) {
         try {
             // Prepare SQL query to update fan details
-            String query = "UPDATE fans SET firstname = ?, lastname = ?, favoriteTeam = ? WHERE id = ?";
+            String query = "UPDATE fans SET firstname = ?, lastname = ?, favoriteteam = ? WHERE id = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fan.getFirstName());
             preparedStatement.setString(2, fan.getLastName());

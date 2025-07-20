@@ -28,7 +28,7 @@ public class GUI extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(new Color(133, 149, 219));
-        setLayout(new GridLayout(6,2));
+        setLayout(new GridLayout(5,2));
 
         //ID section
         idLabel = new JLabel("Enter ID:");
@@ -60,6 +60,9 @@ public class GUI extends JFrame {
         add(displayButton);
         updateButton = new JButton("Update");
         add(updateButton);
+
+        displayButton.setBackground(new Color(128, 255, 217));
+        updateButton.setBackground(new Color(227, 176, 255));
 
         //Action Listener for Display Button
         displayButton.addActionListener(e -> {
