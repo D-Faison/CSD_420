@@ -22,6 +22,7 @@ public class GUI extends JFrame {
     static JButton updateButton;
 
     public GUI() {
+        // Frame settings
         setTitle("Fan Management App");
         setSize(600,600);
         setResizable(false);
@@ -63,9 +64,10 @@ public class GUI extends JFrame {
         //Action Listener for Display Button
         displayButton.addActionListener(e -> {
             try{
+                // Get ID from text field and fetch fan details
                 int id = Integer.parseInt(idTextField.getText().trim());
                 Records fan = db.getFanById(id);
-
+                // Check if fan exists
                 if (fan != null) {
                     firstNameTextField.setText(fan.getFirstName());
                     lastNameTextField.setText(fan.getLastName());
@@ -84,6 +86,7 @@ public class GUI extends JFrame {
         //Action Listener for Update Button
         updateButton.addActionListener(e -> {
             try {
+                // Get values from text fields and create Records object
                 int id = Integer.parseInt(idTextField.getText().trim());
                 String firstName = firstNameTextField.getText().trim();
                 String lastName = lastNameTextField.getText().trim();
@@ -93,13 +96,13 @@ public class GUI extends JFrame {
                     JOptionPane.showMessageDialog(this, "All fields must be filled out!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
+                // Create Records object and update fan details
                 Records fan = new Records();
                 fan.setId(id);
                 fan.setFirstName(firstName);
                 fan.setLastName(lastName);
                 fan.setFavoriteTeam(favoriteTeam);
-
+                // Call update method from database class
                 boolean updated = db.updateFan(fan);
                 if (updated) {
                     JOptionPane.showMessageDialog(this, "Fan updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -112,7 +115,7 @@ public class GUI extends JFrame {
             }
         });
     }
-
+    // Main method to run the GUI application
     public static void main(String[] args) {
         GUI frame = new GUI();
         frame.setVisible(true);

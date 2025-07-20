@@ -38,11 +38,14 @@ public class Faison10Fan{
     // Method to get a fan by ID
     public Records getFanById(int id) {
         Records fan = null;
+        // Prepare SQL query to fetch fan details by ID
         try {
+            // Query to select fan details
             String query = "SELECT * FROM fans WHERE id = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            // If fan exists, create Records object
             if (resultSet.next()) {
                 fan = new Records();
                 fan.setId(resultSet.getInt("id"));
@@ -58,22 +61,24 @@ public class Faison10Fan{
     // Method to update a fan's details
     public boolean updateFan(Records fan) {
         try {
+            // Prepare SQL query to update fan details
             String query = "UPDATE fans SET firstname = ?, lastname = ?, favoriteTeam = ? WHERE id = ?";
             PreparedStatement preparedStatement = con.prepareStatement(query);
             preparedStatement.setString(1, fan.getFirstName());
             preparedStatement.setString(2, fan.getLastName());
             preparedStatement.setString(3, fan.getFavoriteTeam());
             preparedStatement.setInt(4, fan.getId());
-
+            // Execute update and return success status
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
+            // Print error message if update fails
             System.err.println("Error updating fan: " + e.getMessage());
         }
         return false;
     }
 
     public static void main(String[] args) {
-        
+        // Create an instance of the database connection
         Faison10Fan connectionTest = new Faison10Fan();
         System.out.println(connectionTest);
     }
